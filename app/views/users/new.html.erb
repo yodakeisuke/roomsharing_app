@@ -1,0 +1,60 @@
+    <%= render "shared/header" %>
+
+    <%= render "shared/error", obj: @user %>
+
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+    <section class="row justify-content-center my-sm-5">
+      <div class="card text-center ms-5 px-2 py-4" style="max-width: 38rem;">
+        <p class="my-4">新しいアカウントを作成</p>
+
+        <%= form_for @user, url: register_path(@user) do |f| %>
+
+        <div class="row justify-content-center align-items-center">
+          <div class="col-sm-1 required">必須</div>
+          <div class ="col-sm-6 px-sm-0">
+            <%= f.text_field :name, class: "form-control", placeholder: "ユーザー名" %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+          <div class="col-sm-1 required">必須</div>
+          <div class="col-sm-6 px-sm-0">
+            <%= f.text_field :email, class: "form-control", placeholder: "メールアドレス" %>
+         </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+          <div class="col-sm-1 required">必須</div>
+          <div class="col-sm-6 px-sm-0">
+            <%= f.text_field :password, class: "form-control",  placeholder: "パスワード" %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+          <div class="col-sm-1 required">必須</div>
+          <div class="col-sm-6 px-sm-0">
+            <%= f.text_field :password_confirmation, class: "form-control", placeholder: "パスワード（確認）" %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+          <div class="col-sm-8">
+            <%= f.submit "新しいアカウントを作成", class: ["form-control","btn","btn-primary"] %>
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+          <div class="col-sm-8">
+            <%= link_to "既にアカウントをお持ちの方はログイン", login_path, class: ["btn" "btn-link"] %>
+          </div>
+        </div>
+
+        <% end %>
+
+      </div>
+    </section>
+
+    <%= render "shared/footer" %>

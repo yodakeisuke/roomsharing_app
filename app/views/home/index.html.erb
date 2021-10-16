@@ -1,0 +1,64 @@
+  <%= render "shared/header" %>
+
+  <% if flash.notice %>
+    <p class="notice"><%= flash.notice %></p>
+  <% end %>
+
+  <main class="jumbotron jumbotron-fluid top-cover">
+    <div class="container top-content">
+      <div class="row col-lg-6">
+        <div class="form-frame">
+          <div class="form-area">
+            <p class="form-area-title mb-4">Potepan Shareでまだ体験したことのない旅をしよう</p>
+            <%= search_form_for @q, url: search_rooms_path do |f| %>
+              <label>エリア</label>
+              <div class="col-sm3 card-text my-3">
+                <%= f.search_field :address_cont, class: ["form-control", "mb-4", "search-input"], placeholder: '東京'  %>
+              </div>
+              <div class="col-sm3 card-text my-3">
+                <%= f.submit '探す', class: ["btn", "btn-primary", "form-control", "search-btn"] %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="container">
+    <div class="m-5">
+      <h1 class="section-title">おすすめのエリア</h1>
+      <div class="row justify-content-center">
+
+        <div class="card col-sm-2 mx-2 p-0">
+          <%= link_to image_tag("img_tokyo.jpeg", class: "card-img"), search_rooms_path(q: {address_cont: "東京"}), class: "card-img" %>
+          <div class="card-img-overlay">
+            <p class="text-white">東京</p>
+          </div>
+        </div>
+
+        <div class="card col-sm-2 mx-2 p-0">
+          <%= link_to image_tag("img_osaka.jpeg", class: "card-img"), search_rooms_path(q: {address_cont: "大阪"}), class: "card-img" %>
+          <div class="card-img-overlay">
+            <p class="text-white">大阪</p>
+          </div>
+        </div>
+
+        <div class="card col-sm-2 mx-2 p-0">
+          <%= link_to image_tag("img_kyoto.jpeg", class: "card-img"), search_rooms_path(q: {address_cont: "京都"}), class: "card-img" %>
+          <div class="card-img-overlay">
+            <p class="text-white">京都</p>
+          </div>
+        </div>
+
+        <div class="card col-sm-2 mx-2 p-0">
+          <%= link_to image_tag("img_sapporo.jpeg", class: "card-img"), search_rooms_path(q: {address_cont: "札幌"}), class: "card-img" %>
+          <div class="card-img-overlay">
+            <p class="text-white">札幌</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <%= render "shared/footer" %>

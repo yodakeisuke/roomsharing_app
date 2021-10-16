@@ -1,0 +1,49 @@
+    <%= render "shared/header" %>
+
+    <%= render "shared/error", obj: @booking %>
+
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+    <div class="container-fiuld user">
+      <div class="row">
+        <div class="col-md-12 user-view">
+           <div class="user-view-box">
+
+              <div class="update-content">
+                <div class="row">
+                  <label class="col-md-3"><strong>予約した部屋</strong></label>
+                  <div class="col-md-9">
+                    <%= link_to @booking.room.name, new_booking_path(room_id: @booking.room_id) %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="update-content">
+                <div class="row">
+                  <label class="col-md-3"><strong>開始日</strong></label>
+                  <div class="col-md-9"><%= @booking.start_date_formated() %></div>
+                </div>
+              </div>
+
+              <div class="update-content">
+                <div class="row">
+                  <label class="col-md-3"><strong>終了日</strong></label>
+                  <div class="col-md-9"><%= @booking.termination_date_formated() %></div>
+                </div>
+              </div>
+
+              <div class="update-content">
+                <div class="row">
+                  <label class="col-md-3"><strong>価格</strong></label>
+                  <div class="col-md-9"><%= @booking.total_charge.to_i() %> 円</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= render "shared/footer" %>

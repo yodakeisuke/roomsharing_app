@@ -1,0 +1,43 @@
+    <%= render "shared/header" %>
+
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+    <div class="container-fiuld reservations">
+      <h4 class="pb-4">予約済みルーム一覧</h4>
+
+      <table>
+        <thead>
+          <tr align="center">
+            <th>ルーム画像</th>
+            <th>ルーム名</th>
+            <th>ルーム紹介</th>
+            <th>合計料金</th>
+            <th>開始日</th>
+            <th>終了日</th>
+            <th>予約確定日時</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bookings.each do |booking| %>
+            <tr align="center">
+              <td>
+                <% if booking.room.image.attached? %>
+                  <%= link_to image_tag(booking.room.image, class: "reservations-image"), new_booking_path(:booking_id => booking.id) %>
+                <% else %>
+                  <%= link_to image_tag("default_icon.jpeg", class: "reservations-image"), new_booking_path(:booking_id => booking.id) %>
+                <% end %>
+              <td class="posts-name"><%= link_to booking.room.name, new_booking_path(:booking_id => booking.id) %></td>
+              <td class="posts-content"><%= booking.room.introduction%></td>
+              <td>¥ <%= booking.total_charge.to_i() %> </td>
+              <td><%= booking.start_date.to_s(:datetime_jp) %> </td>
+              <td><%= booking.termination_date.to_s(:datetime_jp) %> </td>
+              <td><%= booking.created_at.to_s(:datetime_jp) %> </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <%= render "shared/footer" %>

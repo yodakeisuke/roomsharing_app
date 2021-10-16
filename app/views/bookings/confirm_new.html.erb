@@ -1,0 +1,49 @@
+    <%= render "shared/header" %>
+
+    <%= render "shared/error", obj: @booking %>
+
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+    <div class="container reservations-new">
+      <div class="row">
+        <div class="col-6 offset-3">
+          <div class="reservations-new-nav">
+
+            <h4 class="reservations-new-check-content">予約内容確認</h4>
+            <h5 >¥ <%= @booking.room.charge.to_i() %>  / 日</h5>
+
+              <div class="reservations-new-date-select">
+                <%= form_for @booking do |f| %>
+
+                  <%= f.label :start_date ,"開始日" %>
+                  <%= f.date_field :start_date, class: "form-control mb-4", readonly: "" %>
+
+                  <%= f.label :termination_date ,"終了日" %>
+                  <%= f.date_field :termination_date, class: "form-control mb-4", readonly: "" %>
+
+                  <h6 class="reservations-new-check-content">使用日数 :<%= @booking.days_of_use %> 日</h6>
+                  <h6 class="reservations-new-check-content">人数     :<%= @booking.number_of_users %> 人</h6>
+
+                  <h6 class="reservations-new-check-content">合計金額:<%= @booking.total_charge.to_i() %> 円</h6>
+
+                  <%= f.hidden_field :total_charge %>
+                  <%= f.hidden_field :number_of_users %>
+                  <%= f.hidden_field :room_id %>
+                  <%= f.hidden_field :user_id %>
+
+                  <p class="reservations-new-check-content">上記内容でよろしければ「予約を確定」を押してください</p>
+
+                  <%= f.submit "予約を確定", class: ["form-control","btn","btn-primary", "my-3"] %>
+                  <%= f.submit "戻る", name: "back", class: ["form-control","btn","btn-secondary", "my-3"] %>
+
+                <% end %>
+              </div>
+
+           </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render "shared/footer" %>
