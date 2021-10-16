@@ -1,0 +1,42 @@
+    <%= render "shared/header" %>
+
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+    <div class="container-fiuld room">
+      <h4 class="pb-4">検索結果：<%= @rooms.count %>件</h4>
+      <div class="row">
+
+        <% @rooms.each do |room| %>
+        <%= link_to(new_booking_path(room_id: room.id), class: ["col-sm-6", "col-lg-4", "col-xl-3"]) do %>
+          <div class="room-frame-inner">
+            <div class="room-image-out">
+            <% if room.image.attached? %>
+              <%= image_tag room.image, class: "room-image" %>
+            <% else %>
+              <%= image_tag "default_icon.jpeg", class: "room-image" %>
+            <% end %>
+            </div>
+
+            <div class="room-profile">
+              <div class="room-profile-name">
+                <%= room.name%>
+              </div><br>
+              <div class="room-profile-city">
+                <%= room.address%>
+              </div><br>
+              <div class="room-profile-price">
+                ¥ <%= room.charge.to_i() %>
+              </div>
+
+            </div>
+
+          </div>
+        <% end %>
+        <% end %>
+
+       </div>
+     </div>
+
+    <%= render "shared/footer" %>

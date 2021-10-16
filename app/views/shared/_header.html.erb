@@ -1,0 +1,47 @@
+  <header>
+    <nav class="header-nav">
+
+      <div class="header-left-nav">
+        <%= link_to root_path, class: 'navbar-brand' do %>
+          <%= image_tag 'logo.png' %>
+        <% end %>
+        <div class="form d-flex align-items-center">
+          <%= search_form_for @q, url: search_rooms_path do |f| %>
+          <div class="aria-search-box">
+            <%= f.search_field :address_cont, placeholder: 'エリア'%>
+          </div>
+          <div class="word-search-box">
+          <%= f.search_field :introduction_cont, placeholder: 'キーワード' %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="header-right-nav d-flex align-items-center">
+        <% if current_user %>
+          <p class="text-white pt-2 pe-3"><%= current_user.name %></p>
+          <div class="nav-item dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" id="dropdpwnMenuButton"
+               aria-haspopup="true" aria-expanded="false">
+              <% if current_user.image.attached? %>
+                <%= image_tag current_user.image, class: "nav-host-icon" %>
+              <% else %>
+                <%= image_tag "default_icon.jpeg", class: "nav-host-icon" %>
+              <% end %>
+              </a>
+            <div class="dropdown-menu" aria-labelledby="dropdpwnMenuButton">
+              <div class="dropdown-item"><%= link_to "ルーム登録", new_room_path %></div>
+              <div class="dropdown-item"><%= link_to "登録済みルーム一覧", rooms_path %></div>
+              <div class="dropdown-item"><%= link_to "予約済みルーム一覧", bookings_path %></div>
+              <div class="dropdown-item"><%= link_to "設定", users_account_path %></div>
+              <div class="dropdown-item"><%= link_to "ログアウト", logout_path, method: :delete %></div>
+            </div>
+          </div>
+        <% else %>
+          <div class="nav-acoount-form d-flex align-items-center">
+            <%= link_to 'ログイン', login_path, class: ["navbar-item", "btn", "btn-primary", "text-white", "m-1"] %>
+            <%= link_to '新規登録', register_path, class: ["navbar-item", "btn", "btn-primary", "text-white", "m-1"] %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+  </header>

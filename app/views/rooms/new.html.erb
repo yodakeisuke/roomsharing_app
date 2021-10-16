@@ -1,0 +1,67 @@
+    <%= render "shared/header" %>
+
+    <%= render "shared/error", obj: @room %>
+
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+    <div class="container-fiuld">
+      <div class="row">
+
+        <div class="col-lg-2 nav-pills user-nav">
+          <div class="nav-item">
+            <%= link_to "基本情報", new_room_path, class: "nav-link" %>
+          </div>
+        </div>
+
+        <div class="col-lg-10 user-view">
+
+          <% if flash.notice %>
+            <p class="notice"><%= flash.notice %></p>
+          <% end %>
+
+          <div class="user-view-box">
+
+            <div class="row update-content">
+              <h5 class="room-show-check-content">ルーム情報登録</h5>
+            </div>
+
+          <%= form_for @room do |f| %>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>ルーム名</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5" ><%= f.text_field :name, class: "form-control", placeholder: "ルーム名を入力" %></div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>ルーム紹介</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5"><%= f.text_area :introduction, class: "form-control", placeholder: "ルーム説明を入力"  %></div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>料金</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5"><%= f.text_field :charge, class: "form-control", placeholder: "１日あたりの料金を入力"  %></div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>住所</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5"><%= f.text_field :address, class: "form-control", placeholder: "住所を入力" %></div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>ルーム画像</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5" ><%= f.file_field :image, class: "form-control", placeholder: "ルーム名を入力" %></div>
+              </div>
+
+            <div class="row update-content align-items-center">
+              <%= f.submit "登録", class: ["col-md-2 btn btn-primary mx-3"] %>
+            </div>
+          <% end %>
+
+        </div>
+
+      </div>
+    </div>
+
+    <%= render "shared/footer" %>

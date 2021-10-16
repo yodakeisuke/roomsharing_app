@@ -1,0 +1,47 @@
+    <%= render "shared/header" %>
+    <%= render "shared/error", obj: @user %>
+
+    <div class="container-fiuld">
+      <div class="row">
+
+        <div class="col-lg-2 nav-pills user-nav">
+          <div class="nav-item">
+            <%= link_to "アカウント", users_account_path, class:  ["nav-link","active"]  %>
+          </div>
+          <div class="nav-item">
+            <%= link_to "プロフィール", users_profile_path, class: "nav-link" %>
+          </div>
+        </div>
+
+        <div class="col-lg-10 user-view">
+
+          <% if flash.notice %>
+            <p class="notice"><%= flash.notice %></p>
+          <% end %>
+
+          <div class="user-view-box">
+
+            <div class="row update-content">
+              <h5>アカウント</h5>
+            </div>
+
+              <div class="row update-content">
+                <label class="col-md-3" for="email"><strong>メールアドレス</strong></label>
+                <div class="col-md-9"><%= @user.email %></div>
+              </div>
+
+              <div class="row update-content">
+                <label class="col-md-3" for="password"><strong>パスワード</strong></label>
+                <div class="col-md-9"><%= @user.password %></div>
+              </div>
+
+            <div class="row update-content">
+              <%= link_to "編集する", users_edit_path, class: ["col-md-2", "btn", "btn-primary", "mx-3", "text-white"] %>
+            </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <%= render "shared/footer" %>

@@ -1,0 +1,65 @@
+    <%= render "shared/header" %>
+    <%= render "shared/error", obj: @user %>
+
+    <div class="container-fiuld">
+      <div class="row">
+
+        <div class="col-lg-2 nav-pills user-nav">
+          <div class="nav-item">
+            <%= link_to "アカウント", users_account_path, class: "nav-link" %>
+          </div>
+          <div class="nav-item">
+            <%= link_to "プロフィール", users_profile_path, class: ["nav-link","active"] %>
+          </div>
+        </div>
+
+        <div class="col-lg-10 user-view">
+
+          <% if flash.notice %>
+            <p class="notice"><%= flash.notice %></p>
+          <% end %>
+
+          <div class="user-view-box">
+
+            <div class="row update-content">
+              <h5>プロフィール</h5>
+            </div>
+
+          <%= form_for @user, url: users_profile_path(@user) do |f| %>
+
+              <div class="row update-content justify-content-center align-items-center">
+                <div class="col-sm-2 host-icon">
+                  <% if current_user.image.attached? %>
+                    <%= image_tag current_user.image, class: "host-icon" %>
+                  <% else %>
+                    <%= image_tag "default_icon.jpeg", class: "host-icon" %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>アイコン画像</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5" ><%= f.file_field :image, class: "form-control" %></div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>名前</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5"><%= f.text_field :name, class: "form-control"  %></div>
+              </div>
+
+              <div class="row update-content align-items-center">
+                <div class="col-sm-2 ms-3 px-0"><strong>一言紹介</strong></div><div class="required col-sm-1">必須</div>
+                <div class="col-sm-5"><%= f.text_area :introduction, class: "form-control"  %></div>
+              </div>
+
+            <div class="row update-content align-items-center">
+              <%= f.submit "更新", class: ["col-md-2 btn btn-primary mx-3"] %>
+            </div>
+          <% end %>
+
+        </div>
+
+      </div>
+    </div>
+
+    <%= render "shared/footer" %>

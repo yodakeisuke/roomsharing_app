@@ -1,0 +1,25 @@
+    ja:
+      activerecord:
+        models:
+          user: ユーザー
+          room: ルーム
+          booking: 予約
+        attributes:
+          user:
+            name: 名前
+            email: メールアドレス
+            password: パスワード
+            password_confirmation: パスワード（確認用）
+            introduction: 紹介文
+            image: プロフィール画像
+          room:
+            name: 部屋名
+            introduction: 部屋紹介
+            charge: 料金
+            address: 住所
+          booking:
+            start_date: 利用開始日
+            termination_date: 利用終了日
+            total_charge: 合計料金
+            number_of_users: 利用人数
+
